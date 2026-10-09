@@ -25,11 +25,12 @@ K_used = km.build_K_matrix_ref(C_norm, K_scalar=K_scalar)
 K_initial = K_used.copy()
 D_base = km.build_delay_matrix_ref(D_raw, C_norm)
 
+halt
 #%%sample frequencies and initial conditions
 omega = km.build_natural_frequencies_ref(N, freq_mean_hz=40, freq_std_hz=2)
 initial_phases = km.generate_initial_phases_ref(N)
 
-T, dt = 10, 0.001
+T, dt = 10, 0.0001
 cutoff = int(2/dt) ##seconds
 #%% run
 print("Running!")
@@ -42,6 +43,8 @@ phases_t = km.run_kuramoto(
 
 runtime = time() - t1
 print(f"Run!, time = {runtime:.3f} s")
+
+# np.save("phase_trig_identity.npy",phases_t)
 #%% calculate spectra to observe
 
 phases_t = phases_t.T
@@ -68,5 +71,6 @@ plt.show()
 
 #%%
 
+phases_trig = np.load("")
 
 
